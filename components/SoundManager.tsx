@@ -1,66 +1,72 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 
 export default function SoundManager() {
   const bgAudioRef = useRef<HTMLAudioElement | null>(null);
   const clickAudioRef = useRef<HTMLAudioElement | null>(null);
   const [isMuted, setIsMuted] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
-    // Khởi tạo Audio
+    // 1. Khởi tạo Audio (Chỉ chạy 1 lần duy nhất khi mount)
     bgAudioRef.current = new Audio("/sounds/ambient.mp3");
     bgAudioRef.current.loop = true;
-    bgAudioRef.current.volume = 0.3; // Âm lượng nền vừa phải
+    bgAudioRef.current.volume = 0.3;
 
     clickAudioRef.current = new Audio("/sounds/click.mp3");
-    clickAudioRef.current.volume = 0.5; // Âm lượng click rõ hơn chút
+    clickAudioRef.current.volume = 0.5;
 
-    const handleInteraction = () => {
-      if (!hasInteracted && bgAudioRef.current) {
-        bgAudioRef.current
-          .play()
-          .catch((e) => console.log("Audio play failed", e));
-        setHasInteracted(true);
+    // 2. Hàm xử lý phát nhạc nền (chỉ chạy 1 lần khi user click lần đầu)
+    const playAmbient = () => {
+      if (bgAudioRef.current && bgAudioRef.current.paused) {
+        bgAudioRef.current.play().catch((e) => {
+          console.error("Không thể phát nhạc nền:", e);
+        });
       }
     };
 
-    const handleClick = () => {
-      // Logic để phát tiếng click chồng lên nhau nếu click nhanh
+    // 3. Hàm xử lý tiếng click
+    const playClick = () => {
       if (clickAudioRef.current) {
-        clickAudioRef.current.currentTime = 0; // Reset về đầu
-        clickAudioRef.current.play().catch(() => {});
+        // Clone node để có thể phát chồng âm thanh nếu click nhanh
+        // hoặc đơn giản là reset time về 0
+        const sound = clickAudioRef.current.cloneNode() as HTMLAudioElement;
+        sound.volume = 0.5;
+        sound.play().catch(() => {});
       }
     };
 
-    // Lắng nghe sự kiện để kích hoạt âm thanh lần đầu
-    window.addEventListener("click", handleInteraction, { once: true });
-    window.addEventListener("mousedown", handleClick);
+    // Đăng ký sự kiện
+    // { once: true } nghĩa là sau khi click 1 cái thì tự gỡ sự kiện này ra -> tối ưu
+    window.addEventListener("click", playAmbient, { once: true });
+    window.addEventListener("mousedown", playClick);
 
+    // Cleanup khi component bị hủy (ví dụ chuyển trang khác nếu SPA unmount layout)
     return () => {
-      window.removeEventListener("click", handleInteraction);
-      window.removeEventListener("mousedown", handleClick);
+      window.removeEventListener("click", playAmbient);
+      window.removeEventListener("mousedown", playClick);
       if (bgAudioRef.current) bgAudioRef.current.pause();
     };
-  }, [hasInteracted]);
+  }, []); // <--- Quan trọng: Mảng rỗng để chỉ chạy 1 lần
 
-  // Nút bật/tắt âm thanh (Optional - gắn ở góc màn hình)
   const toggleMute = () => {
-    if (bgAudioRef.current) {
-      bgAudioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+    if (bgAudioRef.current && clickAudioRef.current) {
+      const newState = !isMuted;
+      setIsMuted(newState);
+      bgAudioRef.current.muted = newState;
+      clickAudioRef.current.muted = newState;
     }
   };
 
   return (
     <div className="fixed bottom-5 left-5 z-50 mix-blend-difference">
       <button
-        onClick={toggleMute}
-        className="text-white text-xs uppercase tracking-widest hover:opacity-70 transition-opacity"
+        onClick={(e) => {
+          e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài gây tiếng click kép
+          toggleMute();
+        }}
+        className="text-white text-xs uppercase tracking-widest hover:opacity-70 transition-opacity font-bold cursor-pointer"
       >
-        {isMuted ? "Sound Off" : "Sound On"}
+        {isMuted ? "Sound: Off" : "Sound: On"}
       </button>
     </div>
   );
