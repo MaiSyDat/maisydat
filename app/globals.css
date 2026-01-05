@@ -14,8 +14,18 @@ body {
   color: #0f172a;
 }
 
-* {
-  cursor: none !important;
+/* Hide cursor only on devices with fine pointer (mouse) */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Show default cursor on touch devices */
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
 }
 
 canvas {

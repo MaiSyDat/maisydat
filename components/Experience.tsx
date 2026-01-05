@@ -66,7 +66,7 @@ const Experience: React.FC = () => {
         const heightRange = 35;
         const totalRotations = 2.2;
         const angle = (i / n) * Math.PI * 2 * totalRotations;
-        const radius = isMobile ? 12 : 14; 
+        const radius = isMobile ? 8 : 14; 
         const y = (i / n - 0.5) * heightRange;
         
         pos.set(
@@ -75,7 +75,7 @@ const Experience: React.FC = () => {
           Math.sin(angle) * radius
         );
       } else {
-        const r = isMobile ? 8 : 10;
+        const r = isMobile ? 6 : 10;
         if (n === 1) {
           pos.set(0, 0, 0);
         } else {
@@ -117,6 +117,7 @@ const Experience: React.FC = () => {
   useEffect(() => {
     const handlePointerDown = (e: PointerEvent) => {
       activePointersRef.current.add(e.pointerId);
+      // On touch devices, treat single touch as drag, multi-touch as pan
       if (e.button === 2 || activePointersRef.current.size >= 2) {
         isPanningRef.current = true;
       } else {
@@ -138,8 +139,10 @@ const Experience: React.FC = () => {
         targetPanRef.current.x -= deltaX * 0.04;
         targetPanRef.current.y += deltaY * 0.04;
       } else {
-        targetRotationRef.current.y += deltaX * 0.008;
-        targetRotationRef.current.x += deltaY * 0.008;
+        // Adjust sensitivity for touch devices
+        const rotationSensitivity = isMobile ? 0.012 : 0.008;
+        targetRotationRef.current.y += deltaX * rotationSensitivity;
+        targetRotationRef.current.x += deltaY * rotationSensitivity;
       }
       previousMouseRef.current = { x: e.clientX, y: e.clientY };
     };
@@ -196,7 +199,7 @@ const Experience: React.FC = () => {
         const cardPos = sectionPositions[idx].clone();
         cardPos.applyEuler(sphereGroupRef.current.rotation);
         const dir = cardPos.clone().normalize();
-        const offsetDistance = isMobile ? 10 : 12; 
+        const offsetDistance = isMobile ? 14 : 12; 
         targetCamPos.copy(cardPos).add(dir.multiplyScalar(offsetDistance));
         camera.position.lerp(targetCamPos, 0.1);
         camera.lookAt(cardPos);
@@ -206,17 +209,19 @@ const Experience: React.FC = () => {
         camera.lookAt(lookAtTarget);
       }
     } else if (isContactMode) {
-      const contactDistance = isMobile ? 22 : 14; 
+      const contactDistance = isMobile ? 26 : 16; 
       targetCamPos.set(panRef.current.x, panRef.current.y, contactDistance);
       camera.position.lerp(targetCamPos, 0.1);
       camera.lookAt(lookAtTarget);
     } else if (isResumeMode) {
-      targetCamPos.set(panRef.current.x, panRef.current.y, 30); 
+      const resumeDistance = isMobile ? 40 : 30;
+      targetCamPos.set(panRef.current.x, panRef.current.y, resumeDistance); 
       camera.position.lerp(targetCamPos, 0.1);
       camera.lookAt(lookAtTarget);
     } else if (!isAboutMode) {
       const finalZoom = currentSection === 'projects' ? zoom : zoom - 5;
-      targetCamPos.set(panRef.current.x, panRef.current.y, finalZoom);
+      const adjustedZoom = isMobile ? finalZoom + 8 : finalZoom;
+      targetCamPos.set(panRef.current.x, panRef.current.y, adjustedZoom);
       camera.position.lerp(targetCamPos, 0.1);
       camera.lookAt(lookAtTarget);
     }

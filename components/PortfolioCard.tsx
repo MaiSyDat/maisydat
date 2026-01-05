@@ -69,7 +69,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
     }
     
     // Scale Transition
-    const baseScale = isMobile ? 0.75 : 1;
+    const baseScale = isMobile ? 0.6 : 1;
     const targetS = baseScale * (isActive ? 1.5 : 1);
     const currentSX = meshRef.current.scale.x;
     const lerpedS = THREE.MathUtils.lerp(currentSX, targetS, 0.1);

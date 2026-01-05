@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useMemo, useRef, useState, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { useScroll, Text, Image, Billboard } from '@react-three/drei';
 import * as THREE from 'three';
 import { IDENTITY_DATA, CONTACT_INFO } from '../lib/data';
@@ -14,7 +14,7 @@ const CURVE_POINTS = [
   new THREE.Vector3(-15, -4, -60),
   new THREE.Vector3(18, 6, -110),
   new THREE.Vector3(-10, -2, -160),
-  new THREE.Vector3(0, 0, -210),
+  new THREE.Vector3(0, 0, -275),
 ];
 
 // --- MINIMAL ROAD CARD ---
@@ -23,7 +23,8 @@ const RoadCard: React.FC<{
   subtitle?: string | string[]; 
   image?: string; 
   active?: boolean;
-}> = ({ title, subtitle, image, active }) => {
+  isMobile?: boolean;
+}> = ({ title, subtitle, image, active, isMobile = false }) => {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
@@ -69,21 +70,23 @@ const RoadCard: React.FC<{
       {/* Text Group */}
       <group position={[-1.5, 0.4, 0]}>
         <Text
-          fontSize={0.24}
+          fontSize={isMobile ? 0.18 : 0.24}
           color="#0f172a"
           fontWeight="bold"
           anchorX="left"
+          maxWidth={isMobile ? 2.5 : 4}
         >
           {title}
         </Text>
         {subtitleLines.map((line, index) => (
           <Text
             key={index}
-            fontSize={0.16}
+            fontSize={isMobile ? 0.12 : 0.16}
             color="#94a3b8"
             fontStyle="italic"
-            position={[0.1, -0.3 - (index * 0.25), 0]}
+            position={[0.1, -0.7 - (index * 0.45), 0]}
             anchorX="left"
+            maxWidth={isMobile ? 2.5 : 3}
           >
             {line}
           </Text>
@@ -187,6 +190,8 @@ const IdentityJourney: React.FC = () => {
   const scroll = useScroll();
   const { language } = useStore();
   const curve = useMemo(() => new THREE.CatmullRomCurve3(CURVE_POINTS, false), []);
+  const { size } = useThree();
+  const isMobile = size.width < 768;
 
   useFrame((state) => {
     if (!scroll || !state.camera) return;
@@ -196,7 +201,15 @@ const IdentityJourney: React.FC = () => {
     const lookAtPos = curve.getPointAt(THREE.MathUtils.clamp(offset + 0.05, 0, 1));
     
     if (camPos && lookAtPos) {
-      state.camera.position.lerp(camPos, 0.1);
+      // Adjust camera position for mobile: higher Y and further back
+      if (isMobile) {
+        const adjustedCamPos = camPos.clone();
+        adjustedCamPos.y += 3; // Higher up
+        adjustedCamPos.add(camPos.clone().sub(lookAtPos).normalize().multiplyScalar(-2)); // Further back
+        state.camera.position.lerp(adjustedCamPos, 0.1);
+      } else {
+        state.camera.position.lerp(camPos, 0.1);
+      }
       state.camera.lookAt(lookAtPos);
     }
   });
@@ -207,10 +220,10 @@ const IdentityJourney: React.FC = () => {
       
       <JourneySection t={0.1} curve={curve}>
         <group position={[0, 1, 0]}>
-          <Text fontSize={0.6} color="#000" fontWeight="black" anchorY="bottom" raycast={() => null}>
+          <Text fontSize={isMobile ? 0.4 : 0.6} color="#000" fontWeight="black" anchorY="bottom" raycast={() => null}>
             {IDENTITY_DATA.intro.name}
           </Text>
-          <Text fontSize={0.18} color="#94a3b8" position={[0, -0.3, 0]} fontWeight="medium" raycast={() => null}>
+          <Text fontSize={isMobile ? 0.12 : 0.18} color="#94a3b8" position={[0, -0.3, 0]} fontWeight="medium" raycast={() => null}>
             {IDENTITY_DATA.intro.role.toUpperCase()}
           </Text>
         </group>
@@ -225,6 +238,7 @@ const IdentityJourney: React.FC = () => {
             `GPA: ${IDENTITY_DATA.education.gpa}`
           ]}
           image="/images/education.jpg"
+          isMobile={isMobile}
         />
       </JourneySection>
 
@@ -233,6 +247,7 @@ const IdentityJourney: React.FC = () => {
           title={language === 'en' ? 'Certificates' : 'Chứng chỉ'} 
           subtitle={IDENTITY_DATA.certs.map(c => `${c.name} (${c.date})`)}
           image="/images/certificates.jpg"
+          isMobile={isMobile}
         />
       </JourneySection>
 
@@ -245,6 +260,7 @@ const IdentityJourney: React.FC = () => {
             CONTACT_INFO.dob
           ]}
           image="/images/contact.jpg"
+          isMobile={isMobile}
         />
       </JourneySection>
 
@@ -253,23 +269,24 @@ const IdentityJourney: React.FC = () => {
           title={language === 'en' ? 'Personal Interests' : 'Sở thích cá nhân'} 
           subtitle={IDENTITY_DATA.hobbies.map(h => h.name[language])}
           image="/images/hobbies.jpg"
+          isMobile={isMobile}
         />
       </JourneySection>
 
-      {/* Final Section - Profile Image at the end of road - Only show after passing Personal Interests */}
-      <JourneySection t={1.0} curve={curve} minOffset={0.95}>
-        <group position={[0, 0, 0]}>
-          <Image 
-            url="/images/profile.jpg" 
-            scale={[4, 4]} 
-            position={[0, 0, 0]} 
-            radius={0.5}
-            toneMapped={false}
-          />
-        </group>
+      {/* Final Section - Profile Card at the end of road */}
+      <JourneySection t={1.0} curve={curve}>
+        <RoadCard 
+          title={IDENTITY_DATA.intro.name}
+          subtitle={[
+            IDENTITY_DATA.intro.role,
+            language === 'en' ? 'Thank you for visiting!' : 'Cảm ơn bạn đã ghé thăm!'
+          ]}
+          image="/images/profile.jpg"
+          isMobile={isMobile}
+        />
       </JourneySection>
 
-      <fog attach="fog" args={['#ffffff', 10, 50]} />
+      <fog attach="fog" args={['#ffffff', 10, 70]} />
     </group>
   );
 };
