@@ -12,6 +12,8 @@ const nextConfig = {
     }
     return config;
   },
+  // Add empty turbopack config to silence error
+  turbopack: {},
 };
 
 module.exports = nextConfig;

@@ -138,7 +138,7 @@ const RoadDots: React.FC<{ curve: THREE.CatmullRomCurve3 }> = ({ curve }) => {
 };
 
 // --- SECTION WRAPPER ---
-const JourneySection: React.FC<{ t: number; curve: THREE.CatmullRomCurve3; children: React.ReactNode }> = ({ t, curve, children }) => {
+const JourneySection: React.FC<{ t: number; curve: THREE.CatmullRomCurve3; children: React.ReactNode; minOffset?: number }> = ({ t, curve, children, minOffset }) => {
   const scroll = useScroll();
   const groupRef = useRef<THREE.Group>(null);
   
@@ -146,6 +146,13 @@ const JourneySection: React.FC<{ t: number; curve: THREE.CatmullRomCurve3; child
     if (!groupRef.current || !scroll) return;
     
     const offset = scroll.offset || 0;
+    
+    // Only show if offset has passed minOffset (if specified)
+    if (minOffset !== undefined && offset < minOffset) {
+      groupRef.current.visible = false;
+      return;
+    }
+    
     const distance = Math.abs(offset - t);
     
     const opacity = THREE.MathUtils.clamp(1 - distance / VISIBLE_RANGE, 0, 1);
@@ -249,8 +256,8 @@ const IdentityJourney: React.FC = () => {
         />
       </JourneySection>
 
-      {/* Final Section - Profile Image */}
-      <JourneySection t={0.98} curve={curve}>
+      {/* Final Section - Profile Image at the end of road - Only show after passing Personal Interests */}
+      <JourneySection t={1.0} curve={curve} minOffset={0.95}>
         <group position={[0, 0, 0]}>
           <Image 
             url="/images/profile.jpg" 
