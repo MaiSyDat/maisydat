@@ -24,7 +24,6 @@ const RoadDetailOverlay: React.FC = () => {
           transition={{ duration: 0.4 }}
           className="fixed inset-0 z-[200] pointer-events-none"
         >
-          {/* Background Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -33,7 +32,6 @@ const RoadDetailOverlay: React.FC = () => {
             onClick={() => setSelectedRoadItem(null)}
           />
 
-          {/* Main Content Container */}
           <div className="relative w-full h-full flex items-center justify-center p-6 md:p-12">
             <motion.div
               initial={{ y: '100%', opacity: 0 }}
@@ -42,7 +40,6 @@ const RoadDetailOverlay: React.FC = () => {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full max-w-7xl h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
             >
-              {/* Close Button */}
               <button
                 onClick={() => setSelectedRoadItem(null)}
                 className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-white/90 hover:bg-white transition-colors flex items-center justify-center shadow-lg group"
@@ -58,9 +55,7 @@ const RoadDetailOverlay: React.FC = () => {
                 </svg>
               </button>
 
-              {/* Split Screen Layout */}
               <div className="relative w-full h-full flex flex-col md:flex-row">
-                {/* Left Side - Image */}
                 <motion.div
                   initial={{ x: '-100%', opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -83,7 +78,6 @@ const RoadDetailOverlay: React.FC = () => {
                   )}
                 </motion.div>
 
-                {/* Right Side - Content */}
                 <motion.div
                   initial={{ x: '100%', opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -93,7 +87,6 @@ const RoadDetailOverlay: React.FC = () => {
                     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
                   }}
                 >
-                  {/* Title */}
                   <motion.h1
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -103,7 +96,6 @@ const RoadDetailOverlay: React.FC = () => {
                     {selectedRoadItem.title}
                   </motion.h1>
 
-                  {/* Subtitle */}
                   {subtitleLines.length > 0 && (
                     <motion.div
                       initial={{ y: 30, opacity: 0 }}
@@ -122,7 +114,6 @@ const RoadDetailOverlay: React.FC = () => {
                     </motion.div>
                   )}
 
-                  {/* Description */}
                   {selectedRoadItem.description && (
                     <motion.p
                       initial={{ y: 30, opacity: 0 }}

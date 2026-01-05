@@ -113,25 +113,31 @@ const Experience: React.FC = () => {
       previousMouseRef.current = { x: e.clientX, y: e.clientY };
     };
 
+    let rafId: number | null = null;
     const handlePointerMove = (e: PointerEvent) => {
       if ((!isDraggingRef.current && !isPanningRef.current) || activeId || isAboutMode) return;
       
-      const prevMouse = previousMouseRef.current;
-      if (!prevMouse || typeof prevMouse.x !== 'number') return;
-
-      const deltaX = e.clientX - prevMouse.x;
-      const deltaY = e.clientY - prevMouse.y;
-      
-      if (isPanningRef.current) {
-        targetPanRef.current.x -= deltaX * 0.04;
-        targetPanRef.current.y += deltaY * 0.04;
-      } else {
-        // Adjust sensitivity for touch devices
-        const rotationSensitivity = isMobile ? 0.012 : 0.008;
-        targetRotationRef.current.y += deltaX * rotationSensitivity;
-        targetRotationRef.current.x += deltaY * rotationSensitivity;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
       }
-      previousMouseRef.current = { x: e.clientX, y: e.clientY };
+      
+      rafId = requestAnimationFrame(() => {
+        const prevMouse = previousMouseRef.current;
+        if (!prevMouse || typeof prevMouse.x !== 'number') return;
+
+        const deltaX = e.clientX - prevMouse.x;
+        const deltaY = e.clientY - prevMouse.y;
+        
+        if (isPanningRef.current) {
+          targetPanRef.current.x -= deltaX * 0.04;
+          targetPanRef.current.y += deltaY * 0.04;
+        } else {
+          const rotationSensitivity = isMobile ? 0.012 : 0.008;
+          targetRotationRef.current.y += deltaX * rotationSensitivity;
+          targetRotationRef.current.x += deltaY * rotationSensitivity;
+        }
+        previousMouseRef.current = { x: e.clientX, y: e.clientY };
+      });
     };
 
     const handlePointerUp = () => {
@@ -140,19 +146,33 @@ const Experience: React.FC = () => {
       isPanningRef.current = false;
     };
 
+    let wheelTimeout: NodeJS.Timeout | null = null;
     const handleWheel = (e: WheelEvent) => {
-      if (isAboutMode) return; 
-      const currentZ = zoomRef.current ?? 25;
-      const newZoom = currentZ + e.deltaY * 0.06;
-      setZoom(newZoom);
+      if (isAboutMode) return;
+      
+      if (wheelTimeout) {
+        clearTimeout(wheelTimeout);
+      }
+      
+      wheelTimeout = setTimeout(() => {
+        const currentZ = zoomRef.current ?? 25;
+        const newZoom = currentZ + e.deltaY * 0.06;
+        setZoom(newZoom);
+      }, 16);
     };
 
-    window.addEventListener('pointerdown', handlePointerDown);
-    window.addEventListener('pointermove', handlePointerMove);
-    window.addEventListener('pointerup', handlePointerUp);
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('pointerdown', handlePointerDown, { passive: true });
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerup', handlePointerUp, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: true });
     
     return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      if (wheelTimeout) {
+        clearTimeout(wheelTimeout);
+      }
       window.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
@@ -160,22 +180,26 @@ const Experience: React.FC = () => {
     };
   }, [activeId, setZoom, currentSection, isAboutMode]);
 
+  const frameSkipRef = useRef(0);
   useFrame((state, delta) => {
     if (!sphereGroupRef.current || isAboutMode) return;
 
-    // Smooth orbital rotation
+    frameSkipRef.current++;
+    if (frameSkipRef.current % 2 !== 0 && !isDraggingRef.current) return;
+
     if (!isDraggingRef.current && !activeId && isSphereMode) {
       targetRotationRef.current.y += delta * 0.15; 
     }
     
-    // Lerp values for smooth motion
     rotationRef.current.x = THREE.MathUtils.lerp(rotationRef.current.x, targetRotationRef.current.x, 0.1);
     rotationRef.current.y = THREE.MathUtils.lerp(rotationRef.current.y, targetRotationRef.current.y, 0.1);
     panRef.current.x = THREE.MathUtils.lerp(panRef.current.x, targetPanRef.current.x, 0.1);
     panRef.current.y = THREE.MathUtils.lerp(panRef.current.y, targetPanRef.current.y, 0.1);
     
-    sphereGroupRef.current.rotation.x = rotationRef.current.x;
-    sphereGroupRef.current.rotation.y = rotationRef.current.y;
+    if (sphereGroupRef.current) {
+      sphereGroupRef.current.rotation.x = rotationRef.current.x;
+      sphereGroupRef.current.rotation.y = rotationRef.current.y;
+    }
 
     const targetCamPos = new THREE.Vector3();
     const lookAtTarget = new THREE.Vector3(panRef.current.x, panRef.current.y, 0);
@@ -215,14 +239,12 @@ const Experience: React.FC = () => {
       <pointLight position={[20, 20, 20]} intensity={2.5} />
       <Environment preset="night" />
 
-      {/* Identity Journey - Removed infinite loop */}
       {isAboutMode && (
         <ScrollControls pages={10} damping={0.3} infinite={false}>
           <IdentityJourney />
         </ScrollControls>
       )}
 
-      {/* Portfolio Card Systems */}
       <group ref={sphereGroupRef} visible={!isAboutMode}>
         {sphereItems.map((item, i) => (
           <PortfolioCard 

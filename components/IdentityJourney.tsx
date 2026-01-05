@@ -6,7 +6,6 @@ import * as THREE from 'three';
 import { IDENTITY_DATA, CONTACT_INFO } from '../lib/data';
 import useStore from '../store/useStore';
 
-// --- CONFIGURATION ---
 const VISIBLE_RANGE = 0.2;
 const CURVE_POINTS = [
   new THREE.Vector3(0, 0, 10),
@@ -17,7 +16,6 @@ const CURVE_POINTS = [
   new THREE.Vector3(0, 0, -275),
 ];
 
-// --- MINIMAL ROAD CARD ---
 const RoadCard: React.FC<{ 
   title: string; 
   subtitle?: string | string[]; 
@@ -33,17 +31,13 @@ const RoadCard: React.FC<{
   useEffect(() => {
     if (image) {
       const img = new window.Image();
-      img.onerror = () => {
-        console.warn(`Failed to load image: ${image}`);
-        setFailed(true);
-      };
+      img.onerror = () => setFailed(true);
       img.src = image;
     }
   }, [image]);
 
   const subtitleLines = Array.isArray(subtitle) ? subtitle : subtitle ? [subtitle] : [];
 
-  // Handle cursor on hover
   useEffect(() => {
     if (isHovered) {
       document.body.style.cursor = 'pointer';
@@ -61,13 +55,11 @@ const RoadCard: React.FC<{
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
     >
-      {/* Indicator Line */}
       <mesh position={[-1.8, -0.5, 0]} raycast={() => null}>
         <planeGeometry args={[0.02, 1.5]} />
         <meshBasicMaterial color="#000000" transparent opacity={0.3} />
       </mesh>
 
-      {/* Main Image with fallback */}
       {image && !failed && (
         <Image 
           url={image} 
@@ -78,7 +70,6 @@ const RoadCard: React.FC<{
         />
       )}
       
-      {/* Fallback if image fails or is missing */}
       {(failed || !image) && (
         <mesh position={[-3.8, 0.8, 0]} raycast={() => null}>
           <planeGeometry args={[3.5, 2.2]} />
@@ -86,7 +77,6 @@ const RoadCard: React.FC<{
         </mesh>
       )}
 
-      {/* Text Group */}
       <group position={[-1.5, 0.4, 0]}>
         <Text
           fontSize={isMobile ? 0.18 : 0.24}
@@ -115,7 +105,6 @@ const RoadCard: React.FC<{
   );
 };
 
-// --- STRUCTURED ROAD (DOT GRID) ---
 const RoadDots: React.FC<{ curve: THREE.CatmullRomCurve3 }> = ({ curve }) => {
   const pointsData = useMemo(() => {
     const dots = [];
@@ -159,17 +148,20 @@ const RoadDots: React.FC<{ curve: THREE.CatmullRomCurve3 }> = ({ curve }) => {
   );
 };
 
-// --- SECTION WRAPPER ---
 const JourneySection: React.FC<{ t: number; curve: THREE.CatmullRomCurve3; children: React.ReactNode; minOffset?: number }> = ({ t, curve, children, minOffset }) => {
   const scroll = useScroll();
   const groupRef = useRef<THREE.Group>(null);
+  const lastUpdateRef = useRef(0);
   
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (!groupRef.current || !scroll) return;
+    
+    lastUpdateRef.current += delta;
+    if (lastUpdateRef.current < 0.016) return;
+    lastUpdateRef.current = 0;
     
     const offset = scroll.offset || 0;
     
-    // Only show if offset has passed minOffset (if specified)
     if (minOffset !== undefined && offset < minOffset) {
       groupRef.current.visible = false;
       return;
@@ -204,7 +196,6 @@ const JourneySection: React.FC<{ t: number; curve: THREE.CatmullRomCurve3; child
   );
 };
 
-// --- MAIN COMPONENT ---
 const IdentityJourney: React.FC = () => {
   const scroll = useScroll();
   const { language, setSelectedRoadItem } = useStore();
@@ -212,19 +203,24 @@ const IdentityJourney: React.FC = () => {
   const { size } = useThree();
   const isMobile = size.width < 768;
 
-  useFrame((state) => {
+  const lastUpdateRef = useRef(0);
+  useFrame((state, delta) => {
     if (!scroll || !state.camera) return;
+    
+    lastUpdateRef.current += delta;
+    if (lastUpdateRef.current < 0.016) return;
+    lastUpdateRef.current = 0;
+    
     const offset = THREE.MathUtils.clamp(scroll.offset || 0, 0, 1);
     
     const camPos = curve.getPointAt(offset);
     const lookAtPos = curve.getPointAt(THREE.MathUtils.clamp(offset + 0.05, 0, 1));
     
     if (camPos && lookAtPos) {
-      // Adjust camera position for mobile: higher Y and further back
       if (isMobile) {
         const adjustedCamPos = camPos.clone();
-        adjustedCamPos.y += 3; // Higher up
-        adjustedCamPos.add(camPos.clone().sub(lookAtPos).normalize().multiplyScalar(-2)); // Further back
+        adjustedCamPos.y += 3;
+        adjustedCamPos.add(camPos.clone().sub(lookAtPos).normalize().multiplyScalar(-2));
         state.camera.position.lerp(adjustedCamPos, 0.1);
       } else {
         state.camera.position.lerp(camPos, 0.1);
@@ -344,7 +340,6 @@ const IdentityJourney: React.FC = () => {
         />
       </JourneySection>
 
-      {/* Final Section - Profile Card at the end of road */}
       <JourneySection t={1.0} curve={curve}>
         <RoadCard 
           title={IDENTITY_DATA.intro.name}

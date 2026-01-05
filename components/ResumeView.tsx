@@ -9,7 +9,6 @@ const ResumeView: React.FC = () => {
   
   if (currentSection !== 'resume') return null;
 
-  // Stable filtering by checking categories in both languages or checking ID prefixes
   const skills = PORTFOLIO_DATA.filter(item => 
     item.id.startsWith('skill-') || 
     item.category.en === 'Skill' || 
@@ -53,11 +52,9 @@ const ResumeView: React.FC = () => {
       animate="visible"
       exit="hidden"
       variants={containerVariants}
-      className="fixed inset-0 z-30 overflow-y-auto pointer-events-auto custom-scrollbar bg-white/20 backdrop-blur-[2px]"
+      className="fixed inset-0 z-30 overflow-y-auto pointer-events-auto custom-scrollbar bg-emerald-50/30 backdrop-blur-[2px]"
     >
       <div className="max-w-6xl mx-auto px-6 pt-40 pb-32">
-        
-        {/* SECTION I: EXPERTISE (Skills) */}
         <motion.div variants={itemVariants} className="mb-32">
           <div className="flex items-center gap-6 mb-16">
             <span className="text-[10px] font-black tracking-[0.5em] uppercase text-emerald-600">01</span>
@@ -84,7 +81,6 @@ const ResumeView: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* SECTION II: CHRONOLOGY (Experience) */}
         <motion.div variants={itemVariants}>
           <div className="flex items-center gap-6 mb-16">
             <span className="text-[10px] font-black tracking-[0.5em] uppercase text-emerald-600">02</span>
@@ -131,7 +127,6 @@ const ResumeView: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Call to Action */}
         <motion.div variants={itemVariants} className="mt-32 p-16 bg-slate-900 rounded-[4rem] text-center text-white overflow-hidden relative group">
           <div className="absolute inset-0 bg-emerald-600 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
           <div className="relative z-10">

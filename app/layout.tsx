@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import SoundManager from "@/components/SoundManager";
 
 export const metadata: Metadata = {
   title: 'Mai Sỹ Đạt | Developer',
@@ -8,6 +7,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mai Sỹ Đạt' }],
   icons: {
     icon: '/favicon.ico',
+  },
+  other: {
+    'format-detection': 'telephone=no',
   },
 };
 
@@ -24,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <SoundManager />
         {children}
       </body>
     </html>

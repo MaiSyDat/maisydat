@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useRef, memo, useState, useEffect } from 'react';
+import React, { useRef, memo, useState, useEffect, useCallback } from 'react';
 import { useFrame, ThreeEvent } from '@react-three/fiber';
 import { Text, Float, RoundedBox, Image } from '@react-three/drei';
 import * as THREE from 'three';
@@ -28,24 +28,25 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
     }
   }, [item.image]);
 
-  // Background cards visibility
   const bgOpacity = 0.4;
 
-  const handleClick = (e: ThreeEvent<MouseEvent>) => {
+  const handleClick = useCallback((e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     setActiveId(isActive ? null : item.id);
-  };
+  }, [isActive, item.id, setActiveId]);
 
-  useFrame((state) => {
+  const lastUpdateRef = useRef(0);
+  useFrame((state, delta) => {
     if (!meshRef.current) return;
     
-    // Safe position target
+    lastUpdateRef.current += delta;
+    if (lastUpdateRef.current < 0.016) return;
+    lastUpdateRef.current = 0;
+    
     const targetPos = position || new THREE.Vector3(0, 0, 0);
     
-    // Position Interpolation
     meshRef.current.position.lerp(targetPos, 0.1);
 
-    // Rotation Logic
     if (isActive) {
       meshRef.current.quaternion.slerp(state.camera.quaternion, 0.15);
     } else {
@@ -55,7 +56,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
       } else {
         const currentPos = meshRef.current.position;
         const outwardTarget = new THREE.Vector3().copy(currentPos).multiplyScalar(2);
-        // Ensure outwardTarget isn't zero to avoid lookAt issues
         if (outwardTarget.lengthSq() < 0.0001) outwardTarget.set(0, 0, 1);
         
         const lookMatrix = new THREE.Matrix4().lookAt(
@@ -68,7 +68,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
       meshRef.current.quaternion.slerp(targetQuat, 0.1);
     }
     
-    // Scale Transition
     const baseScale = isMobile ? 0.6 : 1;
     const targetS = baseScale * (isActive ? 1.5 : 1);
     const currentSX = meshRef.current.scale.x;

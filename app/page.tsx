@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import IntroScreen from '@/components/IntroScreen';
 import useStore from '@/store/useStore';
 
-// Dynamic imports with proper SSR handling
 const ClientCanvas = dynamic(() => import('../components/ClientCanvas'), { 
   ssr: false,
   loading: () => null
@@ -29,49 +28,38 @@ export default function Home() {
   useEffect(() => {
     setMounted(true);
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
-    window.addEventListener('contextmenu', handleContextMenu);
+    window.addEventListener('contextmenu', handleContextMenu, { passive: false });
     return () => window.removeEventListener('contextmenu', handleContextMenu);
   }, []);
 
   if (!mounted) {
     return (
-      <div className="relative w-screen h-screen overflow-hidden bg-white select-none">
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#f8fafc] to-[#ffffff]" />
-        </div>
+      <div className="relative w-screen h-screen overflow-hidden select-none">
+        <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-emerald-50 via-emerald-100 to-emerald-200" />
       </div>
     );
   }
 
   return (
-    <main className="relative w-full h-screen bg-black overflow-hidden">
-      {/* 1. Luôn load Cursor */}
+    <main className="relative w-full h-screen overflow-hidden">
       <Suspense fallback={null}>
         <CustomCursor />
       </Suspense>
 
-      {/* 2. Intro Screen (Nằm đè lên trên cùng) */}
       <IntroScreen />
 
-      {/* 3. Nội dung chính (Chỉ hiện rõ khi Intro xong) */}
       <motion.div 
         className="w-full h-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: isIntroDone ? 1 : 0 }}
         transition={{ duration: 1.5, delay: 0.5 }}
       >
-        {/* Clean Aesthetic Gradient Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#f8fafc] to-[#ffffff]" />
-          <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-50/50 blur-[150px] rounded-full" />
-        </div>
+        <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-emerald-50 via-emerald-100 to-emerald-200" />
 
-        {/* Main 3D Canvas */}
         <div className="relative z-1 w-full h-full">
           <ClientCanvas />
         </div>
 
-        {/* HTML Overlay Layers */}
         <Suspense fallback={null}>
           <AnimatePresence mode="wait">
             <ResumeView key="resume-view" />

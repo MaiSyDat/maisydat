@@ -19,8 +19,16 @@ export default function CanvasWrapper() {
   return (
     <Canvas
       camera={{ position: [0, 0, 10], fov: 45 }}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      dpr={[1, 2]}
+      gl={{ 
+        antialias: true, 
+        alpha: true, 
+        powerPreference: "high-performance",
+        stencil: false,
+        depth: true,
+        logarithmicDepthBuffer: false
+      }}
+      dpr={Math.min(window.devicePixelRatio, 2)}
+      performance={{ min: 0.5 }}
     >
       <Suspense fallback={null}>
         <Experience />
