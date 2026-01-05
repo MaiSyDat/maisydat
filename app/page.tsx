@@ -17,6 +17,7 @@ const Loader = dynamic(() => import('@react-three/drei').then((mod) => mod.Loade
 const UIOverlay = lazy(() => import('../components/UIOverlay'));
 const CustomCursor = lazy(() => import('../components/CustomCursor'));
 const ResumeView = lazy(() => import('../components/ResumeView'));
+const RoadDetailOverlay = lazy(() => import('../components/RoadDetailOverlay'));
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -62,6 +63,7 @@ export default function Home() {
         <AnimatePresence mode="wait">
           <ResumeView key="resume-view" />
         </AnimatePresence>
+        <RoadDetailOverlay />
         <UIOverlay />
       </Suspense>
       

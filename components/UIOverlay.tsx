@@ -10,8 +10,7 @@ const UIOverlay: React.FC = () => {
   const SECTIONS: { id: Section; label: { en: string; vi: string } }[] = [
     { id: 'about', label: { en: 'ROAD', vi: 'HÀNH TRÌNH' } },
     { id: 'resume', label: { en: 'OVERVIEW', vi: 'TỔNG QUAN' } },
-    { id: 'projects', label: { en: 'LIST', vi: 'DANH SÁCH' } },
-    { id: 'contact', label: { en: 'INQUIRE', vi: 'LIÊN HỆ' } }
+    { id: 'projects', label: { en: 'PROJECTS', vi: 'DỰ ÁN' } }
   ];
 
   return (

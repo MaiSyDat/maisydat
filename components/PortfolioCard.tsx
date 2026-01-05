@@ -50,7 +50,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
       meshRef.current.quaternion.slerp(state.camera.quaternion, 0.15);
     } else {
       const targetQuat = new THREE.Quaternion();
-      if (currentSection === 'projects' || currentSection === 'contact') {
+      if (currentSection === 'projects') {
         targetQuat.identity();
       } else {
         const currentPos = meshRef.current.position;

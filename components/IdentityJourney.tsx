@@ -24,8 +24,11 @@ const RoadCard: React.FC<{
   image?: string; 
   active?: boolean;
   isMobile?: boolean;
-}> = ({ title, subtitle, image, active, isMobile = false }) => {
+  description?: string;
+  onClick?: () => void;
+}> = ({ title, subtitle, image, active, isMobile = false, description, onClick }) => {
   const [failed, setFailed] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (image) {
@@ -40,8 +43,24 @@ const RoadCard: React.FC<{
 
   const subtitleLines = Array.isArray(subtitle) ? subtitle : subtitle ? [subtitle] : [];
 
+  // Handle cursor on hover
+  useEffect(() => {
+    if (isHovered) {
+      document.body.style.cursor = 'pointer';
+    } else {
+      document.body.style.cursor = '';
+    }
+    return () => {
+      document.body.style.cursor = '';
+    };
+  }, [isHovered]);
+
   return (
-    <group>
+    <group 
+      onClick={onClick}
+      onPointerEnter={() => setIsHovered(true)}
+      onPointerLeave={() => setIsHovered(false)}
+    >
       {/* Indicator Line */}
       <mesh position={[-1.8, -0.5, 0]} raycast={() => null}>
         <planeGeometry args={[0.02, 1.5]} />
@@ -188,7 +207,7 @@ const JourneySection: React.FC<{ t: number; curve: THREE.CatmullRomCurve3; child
 // --- MAIN COMPONENT ---
 const IdentityJourney: React.FC = () => {
   const scroll = useScroll();
-  const { language } = useStore();
+  const { language, setSelectedRoadItem } = useStore();
   const curve = useMemo(() => new THREE.CatmullRomCurve3(CURVE_POINTS, false), []);
   const { size } = useThree();
   const isMobile = size.width < 768;
@@ -239,6 +258,21 @@ const IdentityJourney: React.FC = () => {
           ]}
           image="/images/education.jpg"
           isMobile={isMobile}
+          description={language === 'en' 
+            ? 'Studying Information Technology with focus on software development and system design. Gaining comprehensive knowledge in programming, database management, and web technologies.'
+            : 'Học Công nghệ thông tin với trọng tâm phát triển phần mềm và thiết kế hệ thống. Nắm vững kiến thức về lập trình, quản lý cơ sở dữ liệu và công nghệ web.'}
+          onClick={() => setSelectedRoadItem({
+            title: IDENTITY_DATA.education.school[language],
+            subtitle: [
+              IDENTITY_DATA.education.major[language],
+              IDENTITY_DATA.education.period,
+              `GPA: ${IDENTITY_DATA.education.gpa}`
+            ],
+            image: '/images/education.jpg',
+            description: language === 'en' 
+              ? 'Studying Information Technology with focus on software development and system design. Gaining comprehensive knowledge in programming, database management, and web technologies.'
+              : 'Học Công nghệ thông tin với trọng tâm phát triển phần mềm và thiết kế hệ thống. Nắm vững kiến thức về lập trình, quản lý cơ sở dữ liệu và công nghệ web.'
+          })}
         />
       </JourneySection>
 
@@ -248,6 +282,17 @@ const IdentityJourney: React.FC = () => {
           subtitle={IDENTITY_DATA.certs.map(c => `${c.name} (${c.date})`)}
           image="/images/certificates.jpg"
           isMobile={isMobile}
+          description={language === 'en'
+            ? 'Completed various online courses to enhance programming skills and web development knowledge. These certifications demonstrate commitment to continuous learning and professional growth.'
+            : 'Hoàn thành các khóa học trực tuyến để nâng cao kỹ năng lập trình và kiến thức phát triển web. Các chứng chỉ này thể hiện cam kết học tập liên tục và phát triển chuyên nghiệp.'}
+          onClick={() => setSelectedRoadItem({
+            title: language === 'en' ? 'Certificates' : 'Chứng chỉ',
+            subtitle: IDENTITY_DATA.certs.map(c => `${c.name} (${c.date})`),
+            image: '/images/certificates.jpg',
+            description: language === 'en'
+              ? 'Completed various online courses to enhance programming skills and web development knowledge. These certifications demonstrate commitment to continuous learning and professional growth.'
+              : 'Hoàn thành các khóa học trực tuyến để nâng cao kỹ năng lập trình và kiến thức phát triển web. Các chứng chỉ này thể hiện cam kết học tập liên tục và phát triển chuyên nghiệp.'
+          })}
         />
       </JourneySection>
 
@@ -261,6 +306,21 @@ const IdentityJourney: React.FC = () => {
           ]}
           image="/images/contact.jpg"
           isMobile={isMobile}
+          description={language === 'en'
+            ? 'Feel free to reach out for collaboration opportunities or inquiries. Always open to discussing new projects and creative ideas.'
+            : 'Hãy liên hệ với tôi để hợp tác hoặc trao đổi. Luôn sẵn sàng thảo luận về các dự án mới và ý tưởng sáng tạo.'}
+          onClick={() => setSelectedRoadItem({
+            title: language === 'en' ? 'Contact Information' : 'Thông tin liên hệ',
+            subtitle: [
+              CONTACT_INFO.email,
+              CONTACT_INFO.phone,
+              CONTACT_INFO.dob
+            ],
+            image: '/images/contact.jpg',
+            description: language === 'en'
+              ? 'Feel free to reach out for collaboration opportunities or inquiries. Always open to discussing new projects and creative ideas.'
+              : 'Hãy liên hệ với tôi để hợp tác hoặc trao đổi. Luôn sẵn sàng thảo luận về các dự án mới và ý tưởng sáng tạo.'
+          })}
         />
       </JourneySection>
 
@@ -270,6 +330,17 @@ const IdentityJourney: React.FC = () => {
           subtitle={IDENTITY_DATA.hobbies.map(h => h.name[language])}
           image="/images/hobbies.jpg"
           isMobile={isMobile}
+          description={language === 'en'
+            ? 'Enjoying various activities that help maintain work-life balance and creativity. These interests provide inspiration and keep the mind fresh for new challenges.'
+            : 'Yêu thích các hoạt động đa dạng giúp duy trì cân bằng công việc và cuộc sống. Những sở thích này mang lại cảm hứng và giữ cho tâm trí luôn tươi mới cho những thử thách mới.'}
+          onClick={() => setSelectedRoadItem({
+            title: language === 'en' ? 'Personal Interests' : 'Sở thích cá nhân',
+            subtitle: IDENTITY_DATA.hobbies.map(h => h.name[language]),
+            image: '/images/hobbies.jpg',
+            description: language === 'en'
+              ? 'Enjoying various activities that help maintain work-life balance and creativity. These interests provide inspiration and keep the mind fresh for new challenges.'
+              : 'Yêu thích các hoạt động đa dạng giúp duy trì cân bằng công việc và cuộc sống. Những sở thích này mang lại cảm hứng và giữ cho tâm trí luôn tươi mới cho những thử thách mới.'
+          })}
         />
       </JourneySection>
 
@@ -283,6 +354,16 @@ const IdentityJourney: React.FC = () => {
           ]}
           image="/images/profile.jpg"
           isMobile={isMobile}
+          description={IDENTITY_DATA.intro.bio[language]}
+          onClick={() => setSelectedRoadItem({
+            title: IDENTITY_DATA.intro.name,
+            subtitle: [
+              IDENTITY_DATA.intro.role,
+              language === 'en' ? 'Thank you for visiting!' : 'Cảm ơn bạn đã ghé thăm!'
+            ],
+            image: '/images/profile.jpg',
+            description: IDENTITY_DATA.intro.bio[language]
+          })}
         />
       </JourneySection>
 

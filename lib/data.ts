@@ -107,59 +107,65 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
       vi: "2024 - 2025: Phát triển các plugin WordPress tùy chỉnh, giao diện Shopify và các ứng dụng web độc lập."
     }
   },
-  // --- PROJECTS ---
+  // --- PROJECTS --- (Sorted from Professional to Beginner)
+  
+  // Professional: Graduation Project
   {
-    id: "proj-maisydat-portfolio",
-    title: "Portfolio 3D",
-    category: { en: "Project", vi: "Dự án" },
-    color: "#2ECC71",
+    id: "proj-badmintonshop",
+    title: "Badminton Shop",
+    category: { en: "Graduation", vi: "Đồ án" },
+    color: "#FF2D20",
     description: {
-      en: "My creative 3D portfolio template built with R3F and GSAP.",
-      vi: "Mẫu portfolio 3D sáng tạo được xây dựng bằng R3F và GSAP."
+      en: "Laravel graduation project: Full-featured badminton equipment e-commerce platform.",
+      vi: "Đồ án tốt nghiệp Laravel: Nền tảng thương mại điện tử dụng cụ cầu lông đầy đủ tính năng."
     },
-    url: "https://github.com/MaiSyDat/maisydat-portfolio"
+    url: "https://github.com/MaiSyDat/badmintonshop"
   },
-  {
-    id: "proj-fast-google-index",
-    title: "Fast Index API",
-    category: { en: "Backend", vi: "Hệ thống" },
-    color: "#4285F4",
-    description: {
-      en: "PHP tool for rapid Google Search indexing using official APIs.",
-      vi: "Công cụ PHP giúp index Google Search nhanh chóng sử dụng API chính thức."
-    },
-    url: "https://github.com/MaiSyDat/fastGoogleIndexAPI"
-  },
+  
+  // Professional: Next.js Learning
   {
     id: "proj-dline",
     title: "Dline Task",
     category: { en: "Project", vi: "Dự án" },
     color: "#6366F1",
     description: {
-      en: "Comprehensive task management system built with TypeScript.",
-      vi: "Hệ thống quản lý công việc toàn diện xây dựng bằng TypeScript."
+      en: "Learning Next.js: Comprehensive task management system built with TypeScript.",
+      vi: "Học Next.js: Hệ thống quản lý công việc toàn diện xây dựng bằng TypeScript."
     },
     url: "https://github.com/MaiSyDat/Dline"
+  },
+  
+  // Professional: Plugins & Tools
+  {
+    id: "proj-fast-google-index",
+    title: "Fast Index API",
+    category: { en: "Plugin", vi: "Plugin" },
+    color: "#4285F4",
+    description: {
+      en: "PHP plugin for rapid Google Search indexing using official APIs.",
+      vi: "Plugin PHP giúp index Google Search nhanh chóng sử dụng API chính thức."
+    },
+    url: "https://github.com/MaiSyDat/fastGoogleIndexAPI"
   },
   {
     id: "proj-site-health",
     title: "Site Health Monitor",
-    category: { en: "Tool", vi: "Công cụ" },
+    category: { en: "Plugin", vi: "Plugin" },
     color: "#EF4444",
     description: {
-      en: "Real-time monitoring tool for website status and performance.",
-      vi: "Công cụ giám sát trạng thái và hiệu suất website thời gian thực."
+      en: "Plugin for real-time monitoring of website status and performance.",
+      vi: "Plugin giám sát trạng thái và hiệu suất website thời gian thực."
     },
     url: "https://github.com/MaiSyDat/SiteHealthMonitor"
   },
   {
     id: "proj-tool-seo-hupuna",
     title: "Tool SEO Hupuna",
-    category: { en: "Work", vi: "Công việc" },
+    category: { en: "Plugin", vi: "Plugin" },
     color: "#F59E0B",
     description: {
-      en: "Internal SEO automation tool for media cleaning and indexing.",
-      vi: "Công cụ tự động hóa SEO nội bộ để dọn dẹp media và index."
+      en: "Internal SEO automation plugin for media cleaning and indexing.",
+      vi: "Plugin tự động hóa SEO nội bộ để dọn dẹp media và index."
     },
     url: "https://github.com/MaiSyDat/ToolSeoHupuna"
   },
@@ -174,135 +180,86 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     },
     url: "https://github.com/MaiSyDat/pLugin-cf7-woo-sheet-connect"
   },
+  
+  // Medium: Chrome Extensions
   {
-    id: "proj-seo-hupuna",
-    title: "SEO Hupuna PHP",
-    category: { en: "Project", vi: "Dự án" },
+    id: "proj-neko-pet",
+    title: "Neko Pet",
+    category: { en: "Extension", vi: "Extension" },
+    color: "#FF6B9D",
+    description: {
+      en: "Chrome extension: Virtual desktop cat that follows your cursor with pixel art animations.",
+      vi: "Extension Chrome: Mèo ảo trên desktop theo dõi con trỏ chuột với animation pixel art."
+    },
+    url: "https://github.com/hopcarton/NekoPet"
+  },
+  {
+    id: "proj-hupuna-caro",
+    title: "Hupuna Caro",
+    category: { en: "Extension", vi: "Extension" },
     color: "#10B981",
     description: {
-      en: "Advanced SEO utility suite written in PHP.",
-      vi: "Bộ tiện ích SEO nâng cao được viết bằng PHP."
+      en: "Chrome extension: Tic-Tac-Toe and Gomoku game via LAN Wi-Fi using WebRTC peer-to-peer.",
+      vi: "Extension Chrome: Game Tic-Tac-Toe và Gomoku qua mạng LAN Wi-Fi sử dụng WebRTC peer-to-peer."
     },
-    url: "https://github.com/MaiSyDat/seo-hupuna"
+    url: "https://github.com/hopcarton/hupuna-caro"
   },
   {
-    id: "proj-nextjs-app",
-    title: "My Next App",
-    category: { en: "Frontend", vi: "Giao diện" },
-    color: "#000000",
+    id: "proj-snake-hupuna",
+    title: "Snake Hupuna",
+    category: { en: "Extension", vi: "Extension" },
+    color: "#84CC16",
     description: {
-      en: "Personal exploration project using Next.js and Tailwind CSS.",
-      vi: "Dự án khám phá cá nhân sử dụng Next.js và Tailwind CSS."
+      en: "Chrome extension: Classic Snake game for browser entertainment.",
+      vi: "Extension Chrome: Game Snake cổ điển để giải trí trên trình duyệt."
     },
-    url: "https://github.com/MaiSyDat/my-app-nextjs"
+    url: "https://github.com/hopcarton/snake-hupuna"
   },
+  
+  // Medium: Integration & Theme
   {
     id: "proj-puna-tiktok",
     title: "Puna TikTok",
-    category: { en: "Project", vi: "Dự án" },
+    category: { en: "Theme", vi: "Theme" },
     color: "#FE2C55",
     description: {
-      en: "TikTok integration and marketing tool in PHP.",
-      vi: "Công cụ tích hợp và marketing TikTok bằng PHP."
+      en: "TikTok integration and marketing tool theme in PHP.",
+      vi: "Theme tích hợp và marketing TikTok bằng PHP."
     },
     url: "https://github.com/MaiSyDat/puna-tiktok"
   },
-  {
-    id: "proj-badminton-grad",
-    title: "Badminton Shop",
-    category: { en: "Graduation", vi: "Đồ án" },
-    color: "#84CC16",
-    description: {
-      en: "Graduation project: Full-featured badminton equipment e-commerce using Blade.",
-      vi: "Đồ án tốt nghiệp: Trang thương mại điện tử dụng cụ cầu lông đầy đủ tính năng."
-    },
-    url: "https://github.com/MaiSyDat/badmintonshop"
-  },
-  {
-    id: "proj-badminton-laravel",
-    title: "Badminton Laravel",
-    category: { en: "Backend", vi: "Hệ thống" },
-    color: "#FF2D20",
-    description: {
-      en: "Scalable badminton store backend built with Laravel.",
-      vi: "Hệ thống backend cửa hàng cầu lông xây dựng bằng Laravel."
-    },
-    url: "https://github.com/MaiSyDat/BadmintonLaravel"
-  },
-  {
-    id: "proj-badminton-aptech",
-    title: "Badminton Aptech",
-    category: { en: "Project", vi: "Dự án" },
-    color: "#4F46E5",
-    description: {
-      en: "Full-stack project developed during Aptech training.",
-      vi: "Dự án Full-stack được phát triển trong quá trình đào tạo tại Aptech."
-    },
-    url: "https://github.com/MaiSyDat/badmintonAPTECH"
-  },
-  {
-    id: "proj-intern-report",
-    title: "Intern Report",
-    category: { en: "Education", vi: "Học tập" },
-    color: "#64748B",
-    description: {
-      en: "Comprehensive internship documentation and project logs.",
-      vi: "Tài liệu thực tập toàn diện và nhật ký dự án."
-    },
-    url: "https://github.com/MaiSyDat/Bao-Cao-Thuc-Tap"
-  },
+  
+  // Beginner: Frontend Learning
   {
     id: "proj-druit",
     title: "Druit Template",
-    category: { en: "Frontend", vi: "Giao diện" },
+    category: { en: "Learning", vi: "Học tập" },
     color: "#F97316",
     description: {
-      en: "Modern JavaScript project template for rapid development.",
-      vi: "Mẫu dự án JavaScript hiện đại giúp phát triển nhanh chóng."
+      en: "Learning React Frontend: Modern JavaScript project template for rapid development.",
+      vi: "Học Frontend React: Mẫu dự án JavaScript hiện đại giúp phát triển nhanh chóng."
     },
     url: "https://github.com/MaiSyDat/druit"
   },
   {
-    id: "proj-api-batuyet",
-    title: "API Ba Tuyet",
-    category: { en: "Backend", vi: "Hệ thống" },
-    color: "#9333EA",
-    description: {
-      en: "Custom backend API service developed for Ba Tuyet.",
-      vi: "Dịch vụ API backend tùy chỉnh được phát triển cho Ba Tuyet."
-    },
-    url: "https://github.com/MaiSyDat/api-batuyet"
-  },
-  {
-    id: "proj-shoppe-ui",
-    title: "Shopee Product UI",
-    category: { en: "UI/UX", vi: "Giao diện" },
-    color: "#EE4D2D",
-    description: {
-      en: "Pixel-perfect Shopee product page clone using pure CSS.",
-      vi: "Giao diện trang sản phẩm Shopee tinh tế sử dụng CSS thuần."
-    },
-    url: "https://github.com/MaiSyDat/page-product-shoppe"
-  },
-  {
     id: "proj-music-player",
     title: "Music Player",
-    category: { en: "App", vi: "Ứng dụng" },
+    category: { en: "Learning", vi: "Học tập" },
     color: "#1DB954",
     description: {
-      en: "Interactive web-based music player with modern controls.",
-      vi: "Trình phát nhạc trên web với các điều khiển hiện đại."
+      en: "Learning JavaScript: Interactive web-based music player with modern controls.",
+      vi: "Học JavaScript: Trình phát nhạc trên web với các điều khiển hiện đại."
     },
     url: "https://github.com/MaiSyDat/Music-player"
   },
   {
     id: "proj-the-band",
     title: "The Band",
-    category: { en: "Frontend", vi: "Giao diện" },
+    category: { en: "Learning", vi: "Học tập" },
     color: "#334155",
     description: {
-      en: "Classic responsive landing page for musical bands.",
-      vi: "Trang landing page đáp ứng cổ điển dành cho các ban nhạc."
+      en: "Learning HTML & CSS: Classic responsive landing page for musical bands.",
+      vi: "Học HTML & CSS: Trang landing page đáp ứng cổ điển dành cho các ban nhạc."
     },
     url: "https://github.com/MaiSyDat/The-Band"
   }

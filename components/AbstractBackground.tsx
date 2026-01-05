@@ -65,15 +65,6 @@ const DynamicAtmosphere: React.FC = () => {
         tz = zLayer + Math.cos(tx * 0.02 + t * 0.15) * 15;
         ty = Math.sin(tx * 0.08 + t * 0.3 + s) * 20;
 
-      } else if (currentSection === 'contact') {
-        const radius = 30 * rMod; 
-        const phi = Math.acos(2 * f - 1);
-        const theta = s * Math.PI * 2 + t * 0.1;
-        
-        tx = radius * Math.sin(phi) * Math.cos(theta);
-        ty = radius * Math.sin(phi) * Math.sin(theta);
-        tz = radius * Math.cos(phi);
-
       } else {
         const radius = f * 120 + 5;
         const angle = f * 25 + arm + t * 0.06;

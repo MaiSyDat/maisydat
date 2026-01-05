@@ -6,13 +6,11 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { PORTFOLIO_DATA } from '../lib/data';
 import PortfolioCard from './PortfolioCard';
-import ContactScene from './ContactScene';
 import IdentityJourney from './IdentityJourney';
 import { useStore } from '../store/useStore';
 
 const Experience: React.FC = () => {
   const sphereGroupRef = useRef<THREE.Group>(null);
-  const contactGroupRef = useRef<THREE.Group>(null);
 
   const rotationRef = useRef({ x: 0, y: 0 });
   const targetRotationRef = useRef({ x: 0, y: 0 });
@@ -42,8 +40,7 @@ const Experience: React.FC = () => {
 
   const isAboutMode = currentSection === 'about';
   const isResumeMode = currentSection === 'resume';
-  const isContactMode = currentSection === 'contact';
-  const isSphereMode = !isResumeMode && !isContactMode && !isAboutMode;
+  const isSphereMode = !isResumeMode && !isAboutMode;
 
   const sphereItems = useMemo(() => {
     if (currentSection === 'projects') {
@@ -102,17 +99,7 @@ const Experience: React.FC = () => {
         ease
       });
     }
-
-    if (contactGroupRef.current) {
-      gsap.to(contactGroupRef.current.scale, {
-        x: isContactMode ? 1 : 0,
-        y: isContactMode ? 1 : 0,
-        z: isContactMode ? 1 : 0,
-        duration,
-        ease
-      });
-    }
-  }, [currentSection, isSphereMode, isContactMode]);
+  }, [currentSection, isSphereMode]);
 
   useEffect(() => {
     const handlePointerDown = (e: PointerEvent) => {
@@ -154,7 +141,7 @@ const Experience: React.FC = () => {
     };
 
     const handleWheel = (e: WheelEvent) => {
-      if (currentSection === 'contact' || isAboutMode) return; 
+      if (isAboutMode) return; 
       const currentZ = zoomRef.current ?? 25;
       const newZoom = currentZ + e.deltaY * 0.06;
       setZoom(newZoom);
@@ -208,11 +195,6 @@ const Experience: React.FC = () => {
         camera.position.lerp(targetCamPos, 0.1);
         camera.lookAt(lookAtTarget);
       }
-    } else if (isContactMode) {
-      const contactDistance = isMobile ? 26 : 16; 
-      targetCamPos.set(panRef.current.x, panRef.current.y, contactDistance);
-      camera.position.lerp(targetCamPos, 0.1);
-      camera.lookAt(lookAtTarget);
     } else if (isResumeMode) {
       const resumeDistance = isMobile ? 40 : 30;
       targetCamPos.set(panRef.current.x, panRef.current.y, resumeDistance); 
@@ -251,11 +233,6 @@ const Experience: React.FC = () => {
           />
         ))}
         <ContactShadows position={[0, -20, 0]} opacity={0.5} scale={100} blur={3} />
-      </group>
-
-      {/* Contact Scene */}
-      <group ref={contactGroupRef} scale={0}>
-        <ContactScene isMobile={isMobile} />
       </group>
     </>
   );

@@ -1,5 +1,5 @@
 
-export type Section = 'about' | 'projects' | 'resume' | 'contact';
+export type Section = 'about' | 'projects' | 'resume';
 export type Language = 'en' | 'vi';
 
 export interface PortfolioItem {
@@ -14,15 +14,24 @@ export interface PortfolioItem {
   position?: [number, number, number];
 }
 
+export interface RoadItem {
+  title: string;
+  subtitle?: string | string[];
+  image?: string;
+  description?: string;
+}
+
 export interface AppState {
   language: Language;
   activeId: string | null;
   currentSection: Section;
   zoom: number;
   isDragging: boolean;
+  selectedRoadItem: RoadItem | null;
   setLanguage: (lang: Language) => void;
   setActiveId: (id: string | null) => void;
   setSection: (section: Section) => void;
   setZoom: (zoom: number) => void;
   setIsDragging: (isDragging: boolean) => void;
+  setSelectedRoadItem: (item: RoadItem | null) => void;
 }

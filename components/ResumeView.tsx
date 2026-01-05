@@ -138,12 +138,6 @@ const ResumeView: React.FC = () => {
             <h2 className="text-4xl md:text-7xl font-bold tracking-tighter mb-10">
               {TRANSLATIONS.cta[language]}
             </h2>
-            <button 
-              onClick={() => setSection('contact')}
-              className="px-14 py-6 bg-white text-slate-900 rounded-full font-black uppercase tracking-widest text-xs hover:scale-105 transition-all shadow-2xl active:scale-95"
-            >
-              {TRANSLATIONS.connect[language]}
-            </button>
           </div>
         </motion.div>
       </div>

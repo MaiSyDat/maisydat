@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Mai Sỹ Đạt | Creative Developer & 3D Portfolio',
+  title: 'Mai Sỹ Đạt | Developer',
   description: 'Interactive 3D Portfolio featuring orbital navigation, WebGL experiences, and full-stack expertise.',
   authors: [{ name: 'Mai Sỹ Đạt' }],
   icons: {
