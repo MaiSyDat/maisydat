@@ -2,7 +2,7 @@
 import React, { useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useStore } from '../store/useStore';
+import useStore from '../store/useStore';
 
 const PARTICLE_COUNT = 20000;
 

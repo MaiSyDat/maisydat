@@ -1,8 +1,14 @@
 
+
 import { create } from 'zustand';
 import { AppState } from '../types';
 
-export const useStore = create<AppState>((set) => ({
+interface State extends AppState {
+  isIntroDone: boolean;
+  setIntroDone: (value: boolean) => void;
+}
+
+const useStore = create<State>((set) => ({
   language: 'en',
   activeId: null,
   currentSection: 'about',
@@ -16,8 +22,11 @@ export const useStore = create<AppState>((set) => ({
     activeId: null,
     selectedRoadItem: null
   }),
-  // Expanded zoom range: 5 to 100 for maximum flexibility in seeing the whole spiral
   setZoom: (zoom) => set({ zoom: Math.max(5, Math.min(zoom, 100)) }),
   setIsDragging: (isDragging) => set({ isDragging }),
   setSelectedRoadItem: (item) => set({ selectedRoadItem: item }),
+  isIntroDone: false,
+  setIntroDone: (value) => set({ isIntroDone: value }),
 }));
+
+export default useStore;

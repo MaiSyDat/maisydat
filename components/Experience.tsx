@@ -7,7 +7,7 @@ import gsap from 'gsap';
 import { PORTFOLIO_DATA } from '../lib/data';
 import PortfolioCard from './PortfolioCard';
 import IdentityJourney from './IdentityJourney';
-import { useStore } from '../store/useStore';
+import useStore from '../store/useStore';
 
 const Experience: React.FC = () => {
   const sphereGroupRef = useRef<THREE.Group>(null);

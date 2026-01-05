@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useStore } from '../store/useStore';
+import useStore from '../store/useStore';
 
 const RoadDetailOverlay: React.FC = () => {
   const { selectedRoadItem, setSelectedRoadItem, language } = useStore();

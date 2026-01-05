@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useStore } from '../store/useStore';
+import useStore from '../store/useStore';
 import { PORTFOLIO_DATA } from '../lib/data';
 
 const ListView: React.FC = () => {

@@ -4,7 +4,7 @@ import { useFrame, ThreeEvent } from '@react-three/fiber';
 import { Text, Float, RoundedBox, Image } from '@react-three/drei';
 import * as THREE from 'three';
 import { PortfolioItem } from '../types';
-import { useStore } from '../store/useStore';
+import useStore from '../store/useStore';
 
 interface PortfolioCardProps {
   item: PortfolioItem;
