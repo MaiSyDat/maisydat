@@ -1,38 +1,51 @@
-# MSD Portfolio - 3D Interactive CV
+Here is a professional, high-impact English version of your README, designed to bridge your expertise in WordPress with your new journey into 3D and Game Development.
 
-## About Me
+🚀 [MSD] | Interactive 3D Developer Portfolio
+<div align="center"> <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=6366F1&center=true&vCenter=true&width=500&lines=MAI+SY+DAT;Full-stack+Developer;WordPress+Specialist;3D+Interactive+Explorer" alt="Typing SVG" /> </div>
 
-I am Mai Sy Dat, a Full-stack Developer.
+👨‍💻 Professional Profile
+I am Mai Sy Dat, a Full-stack Developer dedicated to building high-performance web solutions and immersive 3D experiences. With a solid foundation in the PHP/WordPress ecosystem, I am currently expanding my creative boundaries into 3D Graphics and Game Engineering.
 
-Aspiring to develop an IT career, utilizing programming experience and tech knowledge to support users and optimize enterprise IT systems.
+Objective: To leverage my technical expertise in optimizing enterprise IT systems and developing innovative, user-centric digital environments.
 
-My main expertise lies in developing PHP Plugins and Frontend programming using the JavaScript ecosystem (React, Next.js).
+Education: Information Technology at Hanoi Polytechnic College of Technology (GPA: 8.2/10).
 
-Contact Information:
-- Email: msdat2002@gmail.com
+Philosophy: Code is the tool we use to build new worlds—whether it’s a high-converting web system or a dark, atmospheric 3D room.
 
-## About This Project
+🛠️ Technical Arsenal (Skills)
+🌐 Core Web Engineering
+Languages: PHP (Laravel), JavaScript (Next.js 16, React 19), TypeScript.
 
-This is a personal Portfolio page designed with 3D interaction. This project introduces myself in detail, including personal information, education, skills, and a list of projects I have implemented.
+WordPress Mastery: Advanced Theme & Plugin development, WooCommerce API integration, and deep customization of Flatsome/Elementor.
 
-## Technologies Used
+Data & Browser: MySQL, MongoDB, and custom Chrome Extension development.
 
-The project uses the following technologies and libraries:
+Optimization: Google Indexing API, REST API integration, and advanced SEO/Performance tuning.
 
-Core & Framework:
-- Next.js 16
-- React 19
-- TypeScript
+🎮 3D & Creative Development
+Game Engine: Unity 2022 (Proficient in C# scripting for Player Controllers and physics).
 
-3D Graphics:
-- Three.js
-- React Three Fiber (@react-three/fiber)
-- @react-three/drei
+Web 3D: Three.js, React Three Fiber (@react-three/fiber), React Three Drei.
 
-Animations:
-- GSAP
-- Framer Motion
+Animations: GSAP, Framer Motion, and CSS3 SASS/SCSS.
 
-State Management & Styling:
-- Zustand
-- Tailwind CSS
+🕹️ Current Mission: "The Dark Room Project"
+Status: Developer Mode Active Environment: Unity 3D Inventory: Flashlight.cs, PlayerMovement.cs
+
+C#
+// Current logic I'm implementing for my 3D Portfolio
+void Update() {
+    // Handling character movement in a dark environment
+    float x = Input.GetAxis("Horizontal");
+    float z = Input.GetAxis("Vertical");
+    Vector3 move = transform.right * x + transform.forward * z;
+    controller.Move(move * speed * Time.deltaTime);
+}
+📬 Terminal (Contact)
+Email: msdat2002@gmail.com
+
+GitHub: @MaiSyDat
+
+Location: Thanh Tri, Hanoi, Vietnam
+
+<div align="center"> <img src="https://komarev.com/ghpvc/?username=MaiSyDat&label=Portfolio%20Hits&color=indigo&style=flat-square" alt="Portfolio Views" /> </div>
