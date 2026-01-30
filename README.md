@@ -1,51 +1,72 @@
-Here is a professional, high-impact English version of your README, designed to bridge your expertise in WordPress with your new journey into 3D and Game Development.
+# MAI SỸ ĐẠT  
+### WordPress Developer (PHP)
 
-🚀 [MSD] | Interactive 3D Developer Portfolio
-<div align="center"> <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=6366F1&center=true&vCenter=true&width=500&lines=MAI+SY+DAT;Full-stack+Developer;WordPress+Specialist;3D+Interactive+Explorer" alt="Typing SVG" /> </div>
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&pause=1000&color=2563EB&center=true&vCenter=true&width=600&lines=WordPress+Developer+(PHP);Plugin+%7C+Theme+%7C+Chrome+Extension;Backend+Focused+Developer" alt="Typing SVG" />
+</div>
 
-👨‍💻 Professional Profile
-I am Mai Sy Dat, a Full-stack Developer dedicated to building high-performance web solutions and immersive 3D experiences. With a solid foundation in the PHP/WordPress ecosystem, I am currently expanding my creative boundaries into 3D Graphics and Game Engineering.
+---
 
-Objective: To leverage my technical expertise in optimizing enterprise IT systems and developing innovative, user-centric digital environments.
+## PERSONAL INFORMATION
 
-Education: Information Technology at Hanoi Polytechnic College of Technology (GPA: 8.2/10).
+**Full Name:** Mai Sỹ Đạt  
+**Position:** WordPress Developer (PHP)  
 
-Philosophy: Code is the tool we use to build new worlds—whether it’s a high-converting web system or a dark, atmospheric 3D room.
+**Email:** msdat2002@gmail.com  
+**GitHub:** https://github.com/MaiSyDat  
+**Location:** Triều Khúc, Tân Triều, Thanh Trì, Hà Nội  
 
-🛠️ Technical Arsenal (Skills)
-🌐 Core Web Engineering
-Languages: PHP (Laravel), JavaScript (Next.js 16, React 19), TypeScript.
+---
 
-WordPress Mastery: Advanced Theme & Plugin development, WooCommerce API integration, and deep customization of Flatsome/Elementor.
+## CAREER OBJECTIVE
 
-Data & Browser: MySQL, MongoDB, and custom Chrome Extension development.
+I am a **WordPress Developer** with nearly **one year of hands-on experience** in developing **WordPress Plugins, Themes, and Chrome Extensions**.  
+I have strong expertise in **Flatsome / Elementor customization**, as well as **SEO optimization, performance tuning, and system data handling**.
 
-Optimization: Google Indexing API, REST API integration, and advanced SEO/Performance tuning.
+My goal is to continue specializing in **WordPress Backend Development (PHP)** and contribute my programming skills to building **stable, optimized, and high-value IT solutions for businesses**.
 
-🎮 3D & Creative Development
-Game Engine: Unity 2022 (Proficient in C# scripting for Player Controllers and physics).
+---
 
-Web 3D: Three.js, React Three Fiber (@react-three/fiber), React Three Drei.
+## EDUCATION
 
-Animations: GSAP, Framer Motion, and CSS3 SASS/SCSS.
+**Hanoi Polytechnic College of Technology**  
+**Major:** Information Technology  
+**Duration:** August 2022 – December 2025  
+**GPA:** 8.2 / 10  
 
-🕹️ Current Mission: "The Dark Room Project"
-Status: Developer Mode Active Environment: Unity 3D Inventory: Flashlight.cs, PlayerMovement.cs
+---
 
-C#
-// Current logic I'm implementing for my 3D Portfolio
-void Update() {
-    // Handling character movement in a dark environment
-    float x = Input.GetAxis("Horizontal");
-    float z = Input.GetAxis("Vertical");
-    Vector3 move = transform.right * x + transform.forward * z;
-    controller.Move(move * speed * Time.deltaTime);
-}
-📬 Terminal (Contact)
-Email: msdat2002@gmail.com
+## TECHNICAL SKILLS
 
-GitHub: @MaiSyDat
+### Programming Languages & Frameworks
+- PHP (Laravel, WordPress Core)
+- JavaScript (NextJS, ReactJS, jQuery)
+- HTML5, CSS3
+- Tailwind CSS, SASS / SCSS, Bootstrap
 
-Location: Thanh Tri, Hanoi, Vietnam
+### WordPress Expertise
+- Advanced Theme & Plugin Development
+- Flatsome / Elementor Widget Customization
+- WooCommerce API
+- WordPress Hooks & Filters
+- Custom Post Type, Meta Box, Shortcode Development
 
-<div align="center"> <img src="https://komarev.com/ghpvc/?username=MaiSyDat&label=Portfolio%20Hits&color=indigo&style=flat-square" alt="Portfolio Views" /> </div>
+### Chrome Extension
+- Chrome Extension Development for internal systems
+- Working with Chrome Extension API
+
+### Databases
+- MySQL
+- MongoDB
+
+### System & Optimization
+- Server / Hosting Management
+- Google Indexing Optimization
+- Performance Optimization
+- Technical SEO
+
+---
+
+<div align="center">
+  <img src="https://komarev.com/ghpvc/?username=MaiSyDat&label=Profile%20Views&color=2563EB&style=flat" />
+</div>
