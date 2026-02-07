@@ -8,22 +8,22 @@ export const CONTACT_INFO = {
   dob: "18-02-2002",
   github: "https://github.com/MaiSyDat",
   socials: [
-    { id: 'fb', icon: 'FB', url: '#' },
+    { id: 'fb', icon: 'FB', url: 'https://www.facebook.com/sdat.02' },
     { id: 'zalo', icon: 'Zalo', url: 'https://zalo.me/0337555933' },
     { id: 'tele', icon: 'TG', url: '#' },
     { id: 'git', icon: 'Git', url: 'https://github.com/MaiSyDat' },
-    { id: 'ig', icon: 'IG', url: '#' },
-    { id: 'tiktok', icon: 'TT', url: '#' },
+    { id: 'ig', icon: 'IG', url: 'https://www.instagram.com/dat_02/' },
+    { id: 'tiktok', icon: 'TT', url: 'https://www.tiktok.com/@swdat_msdat2002@gmail.com' },
   ]
 };
 
 export const IDENTITY_DATA = {
   intro: {
     name: "MAI SỸ ĐẠT",
-    role: "Developer",
+    role: "WordPress Developer (PHP)",
     bio: {
-      vi: "Mong muốn phát triển sự nghiệp trong lĩnh vực IT, vận dụng kinh nghiệm lập trình và hiểu biết công nghệ để hỗ trợ người dùng và tối ưu hệ thống CNTT của doanh nghiệp.",
-      en: "Aspiring to develop an IT career, utilizing programming experience and tech knowledge to support users and optimize enterprise IT systems."
+      vi: "Lập trình viên WordPress với gần 1 năm kinh nghiệm thực chiến trong việc phát triển Plugin, Theme và Chrome Extension. Biết về tối ưu hệ thống SEO, quản trị dữ liệu và tùy biến Flatsome/Elementor. Mong muốn đóng góp kỹ năng lập trình để xây dựng các giải pháp CNTT tối ưu cho doanh nghiệp.",
+      en: "WordPress Developer with nearly 1 year of hands-on experience in developing Plugins, Themes, and Chrome Extensions. Proficient in SEO optimization, data management, and custom Flatsome/Elementor development. Aiming to contribute programming skills to build optimal IT solutions for businesses."
     }
   },
   education: {
@@ -47,220 +47,213 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
   {
     id: "about",
     title: "MAI SỸ ĐẠT",
-    category: { en: "Profile", vi: "Thông tin" },
-    color: "#2ECC71", 
+    category: { en: "The Protagonist", vi: "Nhân vật chính" },
+    color: "#2ECC71",
     description: {
-      en: "Full-stack Developer | 0337 555 933 | msdat2002@gmail.com. Passionate about building digital solutions with PHP & JS.",
-      vi: "Lập trình viên Full-stack | 0337 555 933 | msdat2002@gmail.com. Đam mê xây dựng các giải pháp kỹ thuật số với PHP & JS."
+      en: "IT Enthusiast | 0337 555 933 | msdat2002@gmail.com. Passionate about system optimization and problem-solving.",
+      vi: "Nhân viên IT | 0337 555 933 | msdat2002@gmail.com. Đam mê tối ưu hóa hệ thống và giải quyết vấn đề."
     },
-    image: "/images/profile.jpg" 
+    image: "/images/profile.jpg"
   },
-  // --- SKILLS ---
-  {
-    id: "skill-frontend",
-    title: "Frontend Mastery",
-    category: { en: "Skill", vi: "Kỹ năng" },
-    color: "#61DAFB",
-    description: {
-      en: "React, Next.js, TypeScript, Tailwind CSS, Framer Motion, Three.js (R3F).",
-      vi: "React, Next.js, TypeScript, Tailwind CSS, Framer Motion, Three.js (R3F)."
-    }
-  },
-  {
-    id: "skill-backend",
-    title: "Backend Core",
-    category: { en: "Skill", vi: "Kỹ năng" },
-    color: "#4F5B93",
-    description: {
-      en: "PHP (Laravel), Node.js, RESTful API, MySQL, PostgreSQL, Redis.",
-      vi: "PHP (Laravel), Node.js, RESTful API, MySQL, PostgreSQL, Redis."
-    }
-  },
-  {
-    id: "skill-tools",
-    title: "DevOps & SEO",
-    category: { en: "Skill", vi: "Kỹ năng" },
-    color: "#F05032",
-    description: {
-      en: "Git, Docker, Google Indexing API, SEO Automation, Technical SEO.",
-      vi: "Git, Docker, Google Indexing API, Tự động hóa SEO, SEO Kỹ thuật."
-    }
-  },
-  // --- EXPERIENCE ---
+
+  // --- EXPERIENCES (STORY CHRONOLOGY) ---
   {
     id: "work-hupuna",
     title: "HUPUNA GROUP",
-    category: { en: "Current Job", vi: "Công việc hiện tại" },
-    color: "#10B981",
+    category: { en: "Experience", vi: "Kinh nghiệm" },
+    color: "#2ECC71",
+    period: "10/2025 - 02/2026",
     description: {
-      en: "10/2025 - Present: Managing the baobicarton.net ecosystem. Built 'ToolSeoHupuna' for indexing automation.",
-      vi: "10/2025 - Hiện tại: Quản lý hệ sinh thái baobicarton.net. Phát triển 'ToolSeoHupuna' tự động hóa indexing."
-    }
+      en: "Developed SEO support tools and Google Sheets integration plugins. Managed 14 satellite websites, optimized UI/UX on Flatsome/Elementor, and built internal Chrome Extensions.",
+      vi: "Phát triển công cụ hỗ trợ SEO và plugin kết nối Google Sheets. Quản trị hệ thống 14 website vệ tinh, tối ưu UI/UX trên Flatsome/Elementor và xây dựng Chrome Extension nội bộ."
+    },
+    location: { en: "Hanoi", vi: "Hà Nội" },
+    image: "/images/hupuna.png"
   },
   {
-    id: "work-freelance",
-    title: "FREELANCE DEV",
+    id: "work-military",
+    title: "NATIONAL SERVICE",
+    category: { en: "Next Chapter", vi: "Chương kế tiếp" },
+    color: "#064E3B",
+    period: "After Lunar New Year 2026",
+    description: {
+      en: "Fulfilling national duty. A transformation from developer to soldier, building discipline and resilience.",
+      vi: "Thực hiện nghĩa vụ quân sự. Sự chuyển mình từ lập trình viên thành người lính, rèn luyện kỷ luật và bản lĩnh."
+    },
+    image: "/images/quandoinhandan.jpg"
+  },
+  {
+    id: "work-ovatheme",
+    title: "OVatheme",
     category: { en: "Experience", vi: "Kinh nghiệm" },
     color: "#3B82F6",
+    period: "04/2025 - 10/2025",
     description: {
-      en: "2024 - 2025: Developed custom WordPress plugins, Shopify themes, and independent web applications.",
-      vi: "2024 - 2025: Phát triển các plugin WordPress tùy chỉnh, giao diện Shopify và các ứng dụng web độc lập."
+      en: "Converted Figma designs to WordPress Themes. Developed custom Elementor widgets and Booking plugin modules. Optimized page performance and provided technical support.",
+      vi: "Chuyển đổi thiết kế Figma thành WordPress Theme. Lập trình Elementor widgets và module cho Plugin Booking. Tối ưu hiệu suất trang và hỗ trợ kỹ thuật."
+    },
+    image: "/images/ovatheme.jpg"
+  },
+  {
+    id: "work-lsd",
+    title: "LSD Technology",
+    category: { en: "Internship", vi: "Thực tập" },
+    color: "#6366F1",
+    period: "01/2025 - 04/2025",
+    description: {
+      en: "Intern focusing on HTML, CSS, ReactJS, and Laravel. Participated in real-world software development cycles.",
+      vi: "Thực tập sinh tập trung vào HTML, CSS, ReactJS và Laravel. Tham gia vào chu kỳ phát triển phần mềm thực tế."
+    },
+    image: "/images/lsd.jpg"
+  },
+
+  // --- PROJECTS ---
+  {
+    id: "proj-brw",
+    title: "BRW – Booking Rental WooCommerce",
+    category: { en: "Backend Project", vi: "Dự án Backend" },
+    color: "#F59E0B",
+    period: "09/2025 - 10/2025",
+    description: {
+      en: "Developed and bug-fixed a WooCommerce rental plugin supporting multiple types (Day, Hours, Mixed, Hotel). Built Elementor shortcodes and a calendar system with pricing and email notifications.",
+      vi: "Tham gia phát triển và fix bug cho plugin đa dạng rental type (Day, Hours, Mixed, Hotel). Xây dựng Elementor shortcode và hệ thống lịch hiển thị giá, gửi email thông báo."
     }
   },
-  // --- PROJECTS --- (Sorted from Professional to Beginner)
-  
-  // Professional: Graduation Project
   {
-    id: "proj-badmintonshop",
-    title: "Badminton Shop",
-    category: { en: "Graduation", vi: "Đồ án" },
-    color: "#FF2D20",
+    id: "proj-hotel",
+    title: "WooCommerce Hotel Booking",
+    category: { en: "Backend Project", vi: "Dự án Backend" },
+    color: "#8B5CF6",
+    period: "07/2025 - 09/2025",
     description: {
-      en: "Laravel graduation project: Full-featured badminton equipment e-commerce platform.",
-      vi: "Đồ án tốt nghiệp Laravel: Nền tảng thương mại điện tử dụng cụ cầu lông đầy đủ tính năng."
-    },
-    url: "https://github.com/MaiSyDat/badmintonshop"
-  },
-  
-  // Professional: Next.js Learning
-  {
-    id: "proj-dline",
-    title: "Dline Task",
-    category: { en: "Project", vi: "Dự án" },
-    color: "#6366F1",
-    description: {
-      en: "Learning Next.js: Comprehensive task management system built with TypeScript.",
-      vi: "Học Next.js: Hệ thống quản lý công việc toàn diện xây dựng bằng TypeScript."
-    },
-    url: "https://github.com/MaiSyDat/Dline"
-  },
-  
-  // Professional: Plugins & Tools
-  {
-    id: "proj-fast-google-index",
-    title: "Fast Index API",
-    category: { en: "Plugin", vi: "Plugin" },
-    color: "#4285F4",
-    description: {
-      en: "PHP plugin for rapid Google Search indexing using official APIs.",
-      vi: "Plugin PHP giúp index Google Search nhanh chóng sử dụng API chính thức."
-    },
-    url: "https://github.com/MaiSyDat/fastGoogleIndexAPI"
+      en: "Built Admin Settings, Meta Boxes for Hotel products, and integrated Easepick Calendar for reservation management, pricing, and services.",
+      vi: "Xây dựng hệ thống Admin Setting, Meta Box cho sản phẩm Hotel và tích hợp Easepick Calendar để quản lý đặt phòng, tính toán giá và dịch vụ."
+    }
   },
   {
-    id: "proj-site-health",
+    id: "proj-remons",
+    title: "Remons Care",
+    category: { en: "Frontend Project", vi: "Dự án Frontend" },
+    color: "#EC4899",
+    period: "04/2025 - 07/2025",
+    description: {
+      en: "Developed custom Elementor widgets (Blog, Booking, Gallery, etc.) and implemented Figma designs into a complete WordPress medical theme.",
+      vi: "Xây dựng các Elementor widget tùy chỉnh (Blog, Booking, Gallery...) và hiện thực hóa thiết kế Figma thành giao diện theme WordPress y tế hoàn chỉnh."
+    }
+  },
+  {
+    id: "proj-cf7-gsheet",
+    title: "CF7 Google Sheet Connector",
+    category: { en: "Automation", vi: "Tự động hóa" },
+    color: "#34A853",
+    period: "2025",
+    description: {
+      en: "Synchronizes customer and order data from Contact Form 7 and WooCommerce to Google Sheets using OAuth 2.0 and Google Sheets API.",
+      vi: "Đồng bộ hóa dữ liệu khách hàng và đơn hàng từ Contact Form 7 và WooCommerce sang Google Sheets sử dụng OAuth 2.0 và Google Sheets API."
+    }
+  },
+  {
+    id: "proj-seo-tool",
+    title: "Fast Google Indexing API",
+    category: { en: "Automation", vi: "Tự động hóa" },
+    color: "#10B981",
+    period: "2025",
+    description: {
+      en: "Automates URL submission to Google Search Console for immediate indexing using Google Indexing API.",
+      vi: "Tự động hóa việc gửi URL bài viết lên Google Search Console để lập chỉ mục ngay lập tức qua Google Indexing API."
+    },
+    url: "https://github.com/MaiSyDat/fast-google-indexing-api"
+  },
+  {
+    id: "proj-health",
     title: "Site Health Monitor",
-    category: { en: "Plugin", vi: "Plugin" },
-    color: "#EF4444",
+    category: { en: "Utility", vi: "Tiện ích" },
+    color: "#F43F5E",
+    period: "2025",
     description: {
-      en: "Plugin for real-time monitoring of website status and performance.",
-      vi: "Plugin giám sát trạng thái và hiệu suất website thời gian thực."
+      en: "Real-time monitoring system for website health and performance status.",
+      vi: "Hệ thống giám sát thời gian thực cho sức khỏe và trạng thái hiệu suất của website."
     },
     url: "https://github.com/MaiSyDat/SiteHealthMonitor"
   },
   {
-    id: "proj-tool-seo-hupuna",
-    title: "Tool SEO Hupuna",
-    category: { en: "Plugin", vi: "Plugin" },
-    color: "#F59E0B",
+    id: "proj-dsmash",
+    title: "DSmash Badminton",
+    category: { en: "Full-stack", vi: "Full-stack" },
+    color: "#EF4444",
+    period: "03/2025 - 05/2025",
     description: {
-      en: "Internal SEO automation plugin for media cleaning and indexing.",
-      vi: "Plugin tự động hóa SEO nội bộ để dọn dẹp media và index."
+      en: "E-commerce platform for badminton gear built with Laravel. Features advanced admin dashboard.",
+      vi: "Nền tảng thương mại điện tử cho dụng cụ cầu lông xây dựng bằng Laravel. Có bảng điều khiển admin nâng cao."
     },
-    url: "https://github.com/MaiSyDat/ToolSeoHupuna"
+    url: "https://github.com/MaiSyDat/BadmintonLaravel/"
   },
   {
-    id: "proj-cf7-woo-sheet",
-    title: "CF7 Woo Connect",
-    category: { en: "Plugin", vi: "Plugin" },
-    color: "#21759B",
+    id: "proj-faker",
+    title: "KKSR Data Faker",
+    category: { en: "Utility", vi: "Tiện ích" },
+    color: "#3B82F6",
+    period: "2025",
     description: {
-      en: "WordPress plugin to sync Contact Form 7 and WooCommerce with Google Sheets.",
-      vi: "Plugin WordPress đồng bộ Contact Form 7 và WooCommerce với Google Sheets."
+      en: "Generates automated social proof by increasing star ratings and sales based on real visitor behavior with database-level control.",
+      vi: "Tạo bằng chứng xã hội (Social Proof) tự động, tăng số lượt đánh giá và lượt bán dựa trên hành vi khách hàng với xử lý Database riêng."
     },
-    url: "https://github.com/MaiSyDat/pLugin-cf7-woo-sheet-connect"
-  },
-  
-  // Medium: Chrome Extensions
-  {
-    id: "proj-neko-pet",
-    title: "Neko Pet",
-    category: { en: "Extension", vi: "Extension" },
-    color: "#FF6B9D",
-    description: {
-      en: "Chrome extension: Virtual desktop cat that follows your cursor with pixel art animations.",
-      vi: "Extension Chrome: Mèo ảo trên desktop theo dõi con trỏ chuột với animation pixel art."
-    },
-    url: "https://github.com/hopcarton/NekoPet"
+    url: "https://github.com/MaiSyDat/kkrs-data-faker"
   },
   {
-    id: "proj-hupuna-caro",
-    title: "Hupuna Caro",
-    category: { en: "Extension", vi: "Extension" },
-    color: "#10B981",
-    description: {
-      en: "Chrome extension: Tic-Tac-Toe and Gomoku game via LAN Wi-Fi using WebRTC peer-to-peer.",
-      vi: "Extension Chrome: Game Tic-Tac-Toe và Gomoku qua mạng LAN Wi-Fi sử dụng WebRTC peer-to-peer."
-    },
-    url: "https://github.com/hopcarton/hupuna-caro"
-  },
-  {
-    id: "proj-snake-hupuna",
-    title: "Snake Hupuna",
-    category: { en: "Extension", vi: "Extension" },
-    color: "#84CC16",
-    description: {
-      en: "Chrome extension: Classic Snake game for browser entertainment.",
-      vi: "Extension Chrome: Game Snake cổ điển để giải trí trên trình duyệt."
-    },
-    url: "https://github.com/hopcarton/snake-hupuna"
-  },
-  
-  // Medium: Integration & Theme
-  {
-    id: "proj-puna-tiktok",
+    id: "proj-tiktok",
     title: "Puna TikTok",
-    category: { en: "Theme", vi: "Theme" },
-    color: "#FE2C55",
+    category: { en: "Web", vi: "Web" },
+    color: "#000000",
+    period: "2025",
     description: {
-      en: "TikTok integration and marketing tool theme in PHP.",
-      vi: "Theme tích hợp và marketing TikTok bằng PHP."
+      en: "Short video interface with infinite scroll, multi-source embedding, and guest comment system.",
+      vi: "Giao diện video ngắn với tính năng Infinite Scroll, nhúng video đa nguồn và hệ thống bình luận không cần đăng nhập."
     },
     url: "https://github.com/MaiSyDat/puna-tiktok"
   },
-  
-  // Beginner: Frontend Learning
   {
-    id: "proj-druit",
-    title: "Druit Template",
-    category: { en: "Learning", vi: "Học tập" },
-    color: "#F97316",
+    id: "proj-games",
+    title: "Chrome Game Hub",
+    category: { en: "Extension", vi: "Extension" },
+    color: "#FACC15",
+    period: "2025",
     description: {
-      en: "Learning React Frontend: Modern JavaScript project template for rapid development.",
-      vi: "Học Frontend React: Mẫu dự án JavaScript hiện đại giúp phát triển nhanh chóng."
+      en: "A collection of Chrome extensions including Gomoku, Snake, and Tank Battle.",
+      vi: "Bộ sưu tập các tiện ích Chrome bao gồm Cờ caro, Rắn săn mồi và Bắn xe tăng."
     },
-    url: "https://github.com/MaiSyDat/druit"
+    url: "https://github.com/hopcarton/Tic-Tac-Toe-Gomoku"
+  },
+
+  // --- SKILLS ---
+  {
+    id: "skill-wp",
+    title: "WordPress Professional",
+    category: { en: "Skill", vi: "Chuyên môn" },
+    color: "#21759B",
+    description: {
+      en: "Theme & Plugin development, Flatsome/Elementor widgets, WooCommerce API, Hook & Filter system.",
+      vi: "Phát triển Theme & Plugin chuyên sâu, tùy biến Flatsome/Elementor, WooCommerce API, Hook & Filter."
+    }
   },
   {
-    id: "proj-music-player",
-    title: "Music Player",
-    category: { en: "Learning", vi: "Học tập" },
-    color: "#1DB954",
+    id: "skill-stack",
+    title: "Dev Stack",
+    category: { en: "Skill", vi: "Kỹ năng" },
+    color: "#4F5B93",
     description: {
-      en: "Learning JavaScript: Interactive web-based music player with modern controls.",
-      vi: "Học JavaScript: Trình phát nhạc trên web với các điều khiển hiện đại."
-    },
-    url: "https://github.com/MaiSyDat/Music-player"
+      en: "PHP (Laravel), JavaScript (NextJS, ReactJS), HTML5/CSS3 (Tailwind, SASS, Bootstrap).",
+      vi: "PHP (Laravel), JavaScript (NextJS, ReactJS), HTML5, CSS3 (Tailwind, SASS, Bootstrap)."
+    }
   },
   {
-    id: "proj-the-band",
-    title: "The Band",
-    category: { en: "Learning", vi: "Học tập" },
-    color: "#334155",
+    id: "skill-other",
+    title: "Systems & Advanced",
+    category: { en: "Skill", vi: "Hệ thống" },
+    color: "#EC4899",
     description: {
-      en: "Learning HTML & CSS: Classic responsive landing page for musical bands.",
-      vi: "Học HTML & CSS: Trang landing page đáp ứng cổ điển dành cho các ban nhạc."
-    },
-    url: "https://github.com/MaiSyDat/The-Band"
+      en: "Chrome Extension API, Google APIs, SEO/Performance optimization, Server/Hosting management, MySQL, MongoDB.",
+      vi: "Chrome Extension API, Google API, tối ưu SEO & Performance, quản trị Server/Hosting, MySQL, MongoDB."
+    }
   }
 ];

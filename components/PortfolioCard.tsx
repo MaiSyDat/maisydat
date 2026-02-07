@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useRef, memo, useState, useEffect, useCallback } from 'react';
 import { useFrame, ThreeEvent } from '@react-three/fiber';
 import { Text, Float, RoundedBox, Image } from '@react-three/drei';
@@ -38,13 +37,13 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
   const lastUpdateRef = useRef(0);
   useFrame((state, delta) => {
     if (!meshRef.current) return;
-    
+
     lastUpdateRef.current += delta;
     if (lastUpdateRef.current < 0.016) return;
     lastUpdateRef.current = 0;
-    
+
     const targetPos = position || new THREE.Vector3(0, 0, 0);
-    
+
     meshRef.current.position.lerp(targetPos, 0.1);
 
     if (isActive) {
@@ -57,7 +56,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
         const currentPos = meshRef.current.position;
         const outwardTarget = new THREE.Vector3().copy(currentPos).multiplyScalar(2);
         if (outwardTarget.lengthSq() < 0.0001) outwardTarget.set(0, 0, 1);
-        
+
         const lookMatrix = new THREE.Matrix4().lookAt(
           currentPos,
           outwardTarget,
@@ -67,7 +66,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
       }
       meshRef.current.quaternion.slerp(targetQuat, 0.1);
     }
-    
+
     const baseScale = isMobile ? 0.6 : 1;
     const targetS = baseScale * (isActive ? 1.5 : 1);
     const currentSX = meshRef.current.scale.x;
@@ -76,9 +75,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
   });
 
   return (
-    <Float 
-      speed={isActive ? 0 : 2} 
-      rotationIntensity={isActive ? 0 : 0.2} 
+    <Float
+      speed={isActive ? 0 : 2}
+      rotationIntensity={isActive ? 0 : 0.2}
       floatIntensity={isActive ? 0 : 0.5}
     >
       <group ref={meshRef} onClick={handleClick}>
@@ -105,12 +104,12 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ item, position, isMobile 
             opacity={activeId && !isActive ? bgOpacity : 1}
           />
         )}
-        
+
         {imageFailed && (
-           <mesh position={[0, 0.5, 0.1]}>
-             <planeGeometry args={[2.2, 2.2]} />
-             <meshBasicMaterial color={item.color} transparent opacity={0.2} />
-           </mesh>
+          <mesh position={[0, 0.5, 0.1]}>
+            <planeGeometry args={[2.2, 2.2]} />
+            <meshBasicMaterial color={item.color} transparent opacity={0.2} />
+          </mesh>
         )}
 
         <mesh position={[0, 1.7, 0.1]}>

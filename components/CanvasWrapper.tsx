@@ -1,6 +1,5 @@
 'use client';
 
-// @ts-nocheck
 import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Experience from './Experience';
@@ -19,9 +18,9 @@ export default function CanvasWrapper() {
   return (
     <Canvas
       camera={{ position: [0, 0, 10], fov: 45 }}
-      gl={{ 
-        antialias: true, 
-        alpha: true, 
+      gl={{
+        antialias: true,
+        alpha: true,
         powerPreference: "high-performance",
         stencil: false,
         depth: true,

@@ -12,6 +12,8 @@ export interface PortfolioItem {
   type?: 'image' | 'video';
   url?: string;
   position?: [number, number, number];
+  period?: string;
+  location?: { en: string; vi: string };
 }
 
 export interface RoadItem {
